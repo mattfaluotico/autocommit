@@ -1,3 +1,4 @@
+
 find ~/Development -name '.autocommit' -print0 | xargs -0 -n1 dirname | while read line; do
     
     echo "\nProcessing file '$line'"
