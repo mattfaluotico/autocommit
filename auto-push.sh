@@ -1,33 +1,51 @@
-find ~/Development/Alfred-Workflows -name '.git' -print0 | xargs -0 -n1 dirname | while read line; do
+find ~/Development -name '.autocommit' -print0 | xargs -0 -n1 dirname | while read line; do
+    
     echo "\nProcessing file '$line'"
     BRANCH="$(cd $line && git rev-parse --symbolic-full-name --abbrev-ref HEAD)"
 
-    echo "\ncurrent banch: $BRANCH"
+    HASGIT=$(find . -name '.git')
+    if [ -n "$HASGIT" ]; then
+        echo "\ncurrent banch: $BRANCH"
 
-    # Stash
+        # Adds all files for stashing
+        echo "\n***Adding all files***"
+        eval "(cd $line && git add .)"
 
-    echo "\nAttempting to create branch 'autocommit'..."
-    eval "(cd $line && git checkout -b autocommit)"
+        # Stash current branch so the files are not lost
+        echo "\n***Stashing Changes***"
+        eval "(cd $line && git stash)"
 
-    echo "\nSwitching to branch 'autocommit'..."
-    eval "(cd $line && git checkout autocommit)"
+        # Switching to the autocommit branch
+        echo "\n***Attempting to create branch 'autocommit'***"
+        eval "(cd $line && git checkout -b autocommit)"
 
-    # Stash Apply 
+        echo "\n***Switching to branch 'autocommit'***"
+        eval "(cd $line && git checkout autocommit)"
 
-    echo "\nAdding all files..."
-    eval "(cd $line && git add .)"
+        # Stash Apply 
+        echo "\n***Apply stashed files to autocommit***"
+        eval "(cd $line && git stash apply)"
 
-    echo "\nCommitting files..."
-    eval "(cd $line && git commit -m 'autocommit on $(date)')"
+        # Add files to current 
+        echo "\n***Adding all files***"
+        eval "(cd $line && git add .)"
 
-	echo "\nPushing files to branch"
-    eval "(cd $line && git push origin autocommit)"
+        echo "\n***Committing files***"
+        eval "(cd $line && git commit -m 'autocommit on $(date)')"
 
+        echo "\n***Pushing files to branch***"
+        eval "(cd $line && git push origin autocommit)"
 
-    echo "\nReturning to origin branch..."
-    eval "(cd $line && git checkout $BRANCH)"
+        # Return to initial branch
+        echo "\n***Returning to origin branch***"
+        eval "(cd $line && git checkout $BRANCH)"
 
-    # Stash pop
+        # Stash pop
+        echo "\n***Returning files to branch***"
+        eval "(cd $line && git stash pop)"
 
-    echo "\n-----------------------------------"
+        echo "\n-----------------------------------"
+    else
+        echo "$line contains no .git file"
+    fi
 done
