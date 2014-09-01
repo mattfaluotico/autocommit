@@ -26,7 +26,7 @@ find ~/Development -name '.autocommit' -print0 | xargs -0 -n1 dirname | while re
         echo "\n***Apply stashed files to autocommit***"
         eval "(cd $line && git stash apply)"
 
-        # Add files to current 
+        # Commit files to autocommit
         echo "\n***Adding all files***"
         eval "(cd $line && git add .)"
 
