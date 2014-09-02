@@ -3,7 +3,7 @@ autocommit
 
 I lost code a few times and this felt like a good idea.
 
-Script to auto commit repositories to a branch called 'autocommit'. 
+Script to auto commit repositories to a branch called 'autocommit'. Just set it up as a cron job to run however often you want it to. 
 
 ## Using autocommit
 
@@ -14,3 +14,4 @@ Now in ary repo that you want to autocommit, just add a file called '.autocommit
 You should be good! 
 
 If any code is lost, it isn't my fault, but I have not lost any yet. 
+
