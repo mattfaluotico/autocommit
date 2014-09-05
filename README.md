@@ -14,7 +14,7 @@ Now in ary repo that you want to autocommit, just add a file called '.autocommit
 You should be good! 
 
 
-**Cron jobs do not seem to be pushing the code, but they still commit the code. Not sure what is going on**
+**Cron does not run as the current user, so you have to modify the push command to give ocrrect permissions**
 
 If any code is lost, it isn't my fault, but I have not lost any yet. 
 
