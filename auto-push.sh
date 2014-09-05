@@ -36,6 +36,7 @@ find ~/Development -name '.autocommit' -print0 | xargs -0 -n1 dirname | while re
 
         echo "\n***Pushing files to branch***"
         eval "(cd $line && git push origin autocommit)"
+        # eval "(cd $line && HOME=/home/mfaluotico git push origin autocommit)"
 
         # Return to initial branch
         echo "\n***Returning to origin branch***"
