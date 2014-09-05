@@ -35,11 +35,7 @@ find ~/Development -name '.autocommit' -print0 | xargs -0 -n1 dirname | while re
         eval "(cd $line && git commit -m 'autocommit on $(date)')"
 
         echo "\n***Pushing files to branch***"
-<<<<<<< Updated upstream
         eval "(cd $line && HOME=/Users/mfaluotico git push origin autocommit)"
-=======
-        eval "(cd $line && HOME=/home/mfaluotico git push origin autocommit)"
->>>>>>> Stashed changes
 
         # Return to initial branch
         echo "\n***Returning to origin branch***"
