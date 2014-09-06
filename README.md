@@ -14,7 +14,7 @@ Now in ary repo that you want to autocommit, just add a file called '.autocommit
 You should be good! 
 
 
-**Cron does not run as the current user, so you have to modify the push command to give ocrrect permissions**
+**Cron does not run as the current user, so you have to modify the push command to give correct permissions**
 
 If any code is lost, it isn't my fault, but I have not lost any yet. 
 
